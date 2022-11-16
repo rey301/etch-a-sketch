@@ -23,8 +23,9 @@ const editBtn = document.querySelector('.edit-button');
 editBtn.addEventListener('click', e => {
     let numSquares = prompt("Enter new number of squares per side", 16);
 
-    if (numSquares > 100 || numSquares < 16) {
+    while ((numSquares > 100 || numSquares < 16) && numSquares !== null) {
         numSquares = prompt("Number has to be between 16 - 100!", 16);
+        console.log(numSquares);
     } 
 
     createGrid(numSquares);
