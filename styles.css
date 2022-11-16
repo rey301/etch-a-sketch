@@ -1,19 +1,15 @@
 body {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .grid {
-    display: flex;
-    flex-wrap: wrap;
-    width: 400px;
-    border: 2px solid black;
-}
-
-.grid > * {
-    flex: 0 0 auto;
-    height: 100px;
-    width: 100px;
+    display: grid;
+    border: 1px solid black;
+    width: 700px;
+    height: 700px;
 }
 
 .hover-over {
