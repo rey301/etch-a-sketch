@@ -1,5 +1,5 @@
-// used to create a grid with numSquares as the number of squares per side
-function createGrid(numSquares) {
+// create a grid with numSquares as the number of squares per side
+function createGrid(numSquares, mode) {
     const grid = document.querySelector('.grid');
     while (grid.firstChild) {
         grid.removeChild(grid.lastChild);
@@ -9,29 +9,48 @@ function createGrid(numSquares) {
         const div = document.createElement('div');
         div.classList.add(`cell-${i}`);
 
-        div.addEventListener('mouseover', e => 
-            e.target.classList.add('hover-over'), {once: true}
-        );
+        div.addEventListener('mouseover', e => {
+            if (mode === 'black') {
+                e.target.style.backgroundColor = 'black';
+            } else if (mode === 'rainbow') {
+                let r = Math.floor(Math.random() * 256);
+                let g = Math.floor(Math.random() * 256);
+                let b = Math.floor(Math.random() * 256);
+                e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            }
+
+        }, {once: false});
         grid.appendChild(div);
     }
 
     grid.style.cssText = `grid-template-columns: repeat(${numSquares}, 1fr); `;
 }
 
+let numSquares = 16;
+let mode = 'black';
+
 // edit grid button
 const editBtn = document.querySelector('.edit-button');
-editBtn.addEventListener('click', e => {
-    let numSquares = prompt("Enter new number of squares per side", 16);
+editBtn.addEventListener('click', () => {
+    numSquares = prompt("Enter new number of squares per side", 16);
 
     while ((numSquares > 100 || numSquares < 16) && numSquares !== null) {
         numSquares = prompt("Number has to be between 16 - 100!", 16);
-        console.log(numSquares);
+        console.log(numSquares, mode);
     } 
 
     if (numSquares !== null) {
-        createGrid(numSquares);
+        createGrid(numSquares, mode);
     }
 });
 
+// rainbow mode
+const rainbowBtn = document.querySelector('.rainbow-button');
+
+rainbowBtn.addEventListener('click', () => {
+    mode = 'rainbow';
+    createGrid(numSquares, mode);
+});
+
 // initial grid
-createGrid(16);
+createGrid(numSquares, mode);
