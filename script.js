@@ -28,7 +28,9 @@ editBtn.addEventListener('click', e => {
         console.log(numSquares);
     } 
 
-    createGrid(numSquares);
+    if (numSquares !== null) {
+        createGrid(numSquares);
+    }
 });
 
 // initial grid
