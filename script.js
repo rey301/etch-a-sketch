@@ -85,7 +85,7 @@ function createGrid() {
                     ;
                 });
             }
-        }, {once: false});
+        }, {once: true});
 
         
         grid.appendChild(div);

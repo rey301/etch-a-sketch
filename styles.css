@@ -2,18 +2,30 @@ body {
     display: flex;
     padding: 30px;
     justify-content: center;
-    align-items: center;
+    flex-direction: column;
     gap: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    gap: 20px;
+    justify-content: space-evenly;
 }
 
 .buttons {
     display: flex;
     flex-direction: column;
+    justify-content: end;
     gap: 10px;
 }
 
 .grid {
-    flex-basis: 700px;
+    flex-basis: 600px;
     display: grid;
     border: 4px solid black;
     aspect-ratio: 1 / 1;
