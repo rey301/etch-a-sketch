@@ -1,14 +1,59 @@
+function incrementRgbVals(rgbVals) {
+    // [255, 0, 0]
+    let incVal = 50;
+    let r = rgbVals[0];
+    let g = rgbVals[1];
+    let b = rgbVals[2];
+
+    if (r === 255 && g === 0 && b < 255) {
+        rgbVals[2] += incVal;
+        if (rgbVals[2] > 255) {
+            rgbVals[2] = 255;
+        }
+    } else if (r > 0 && g === 0 && b === 255) {
+        rgbVals[0] -= incVal;
+        if (rgbVals[0] < 0) {
+            rgbVals[0] = 0;
+        }
+    } else if (r === 0 && g < 255 && b === 255) {
+        rgbVals[1] += incVal;
+        if (rgbVals[1] > 255) {
+            rgbVals[1] = 255;
+        }
+    } else if (r === 0 && g === 255 && b > 0) {
+        rgbVals[2] -= incVal
+        if (rgbVals[2] < 0) {
+            rgbVals[2] = 0;
+        }
+    } else if (r < 255 && g === 255 && b === 0) {
+        rgbVals[0] += incVal;
+        if (rgbVals[0] > 255) {
+            rgbVals[0] = 255;
+        }
+    } else if (r === 255 && g > 0 && b === 0) {
+        rgbVals[1] -= incVal;
+        if (rgbVals[1] < 0) {
+            rgbVals[1] = 0;
+        }
+    }
+
+    return rgbVals;
+}
+
+function calcFadeVal(val) {
+    return Math.ceil(val/10);
+}
+
 // create a grid with numSquares as the number of squares per side
-function createGrid(numSquares, mode) {
+function createGrid() {
     const grid = document.querySelector('.grid');
+    let rgbVals = [255, 0, 0];
     while (grid.firstChild) {
         grid.removeChild(grid.lastChild);
     }
 
     for (let i=0; i < numSquares**2; i++) {
-        let minusTenR;
-        let minusTenG;
-        let minusTenB;
+        let fadeColors;
         const div = document.createElement('div');
         div.classList.add(`cell-${i}`);
 
@@ -16,15 +61,16 @@ function createGrid(numSquares, mode) {
             if (mode === 'black') {
                 e.target.style.backgroundColor = 'black';
             } else if (mode === 'rainbow') {
-                let r = Math.floor(Math.random() * 256);
-                let g = Math.floor(Math.random() * 256);
-                let b = Math.floor(Math.random() * 256);
+                let r = rgbVals[0];
+                let g = rgbVals[1];
+                let b = rgbVals[2];
+
                 e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-                minusTenR = Math.ceil(r/10);
-                minusTenG = Math.ceil(g/10);
-                minusTenB = Math.ceil(b/10);
-                
+                rgbVals = incrementRgbVals(rgbVals);
+
+                fadeColors = [calcFadeVal(r), calcFadeVal(g), calcFadeVal(b)];
                 const gridChild = grid.children[i];
+
                 gridChild.addEventListener('mouseover', () => {
                     const bgdColor = gridChild.style.backgroundColor;
                     const colorArray = bgdColor.substring(
@@ -33,12 +79,13 @@ function createGrid(numSquares, mode) {
                     ).split(',');
 
                     gridChild.style.backgroundColor = 
-                        `rgb(${colorArray[0] - minusTenR},
-                        ${colorArray[1] - minusTenG}, ${colorArray[2] - minusTenB})`
+                        `rgb(${colorArray[0] - fadeColors[0]},
+                        ${colorArray[1] - fadeColors[1]}, 
+                        ${colorArray[2] - fadeColors[2]})`
                     ;
                 });
             }
-        }, {once: true});
+        }, {once: false});
 
         
         grid.appendChild(div);
@@ -73,12 +120,8 @@ editBtn.addEventListener('click', () => {
 const rainbowBtn = document.querySelector('.rainbow-button');
 rainbowBtn.addEventListener('click', () => {
     mode = 'rainbow';
-    createGrid(numSquares, mode);
+    createGrid();
 });
 
-
-
-
-
 // initial grid
-createGrid(numSquares, mode);
+createGrid();
