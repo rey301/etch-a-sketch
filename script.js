@@ -6,6 +6,9 @@ function createGrid(numSquares, mode) {
     }
 
     for (let i=0; i < numSquares**2; i++) {
+        let minusTenR;
+        let minusTenG;
+        let minusTenB;
         const div = document.createElement('div');
         div.classList.add(`cell-${i}`);
 
@@ -17,9 +20,27 @@ function createGrid(numSquares, mode) {
                 let g = Math.floor(Math.random() * 256);
                 let b = Math.floor(Math.random() * 256);
                 e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-            }
+                minusTenR = Math.ceil(r/10);
+                minusTenG = Math.ceil(g/10);
+                minusTenB = Math.ceil(b/10);
+                
+                const gridChild = grid.children[i];
+                gridChild.addEventListener('mouseover', () => {
+                    const bgdColor = gridChild.style.backgroundColor;
+                    const colorArray = bgdColor.substring(
+                        bgdColor.indexOf('(') + 1, 
+                        bgdColor.lastIndexOf(')')
+                    ).split(',');
 
-        }, {once: false});
+                    gridChild.style.backgroundColor = 
+                        `rgb(${colorArray[0] - minusTenR},
+                        ${colorArray[1] - minusTenG}, ${colorArray[2] - minusTenB})`
+                    ;
+                });
+            }
+        }, {once: true});
+
+        
         grid.appendChild(div);
     }
 
@@ -28,6 +49,10 @@ function createGrid(numSquares, mode) {
 
 let numSquares = 16;
 let mode = 'black';
+let passed = false;
+let minusTenR;
+let minusTenG;
+let minusTenB;
 
 // edit grid button
 const editBtn = document.querySelector('.edit-button');
@@ -46,11 +71,14 @@ editBtn.addEventListener('click', () => {
 
 // rainbow mode
 const rainbowBtn = document.querySelector('.rainbow-button');
-
 rainbowBtn.addEventListener('click', () => {
     mode = 'rainbow';
     createGrid(numSquares, mode);
 });
+
+
+
+
 
 // initial grid
 createGrid(numSquares, mode);
