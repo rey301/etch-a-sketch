@@ -100,10 +100,10 @@ let minusTenB;
 // edit grid button
 const editBtn = document.querySelector('.edit-button');
 editBtn.addEventListener('click', () => {
-    numSquares = prompt("Enter new number of squares per side", 16);
+    numSquares = prompt("Enter new number of squares per side", numSquares);
 
     while ((numSquares > 100 || numSquares < 16) && numSquares !== null) {
-        numSquares = prompt("Number has to be between 16 - 100!", 16);
+        numSquares = prompt("Number has to be between 16 - 100!", numSquares);
         console.log(numSquares, mode);
     } 
 
