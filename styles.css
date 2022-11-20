@@ -1,51 +1,87 @@
+/* Global */
 body {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 
+        'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 
+        'Helvetica Neue', sans-serif;
+    background-color: rgb(255, 40, 40);
+    min-height: 100vh;
+    margin: 0;
+
+}
+
+button {
+    border-radius: 50px;
+    padding: 5.5%;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    box-shadow: 0px 5px rgb(112, 111, 111);
+}
+
+button:hover {
+    background-color: rgb(210, 210, 210);
+}
+
+button:active {
+    box-shadow: 0 2px rgb(65, 65, 65);
+    transform: translateY(3px);
+}
+
+/* Header */
+.header {
+    font-family: Brush Script MT, Brush Script Std, cursive;
+    font-size: 35px;
+    padding-top: 30px;
+    text-align: center;
+    color: gold;
+    text-shadow: 1px 1px 0px goldenrod;
 }
 
 /* Content */
 .content {
     display: flex;
-    flex-direction: column;
-    width: 40%;
-    gap: 20px;
-    background-color: rgb(255, 40, 40);
-    border: 10px solid rgb(255, 60, 60);
-    border-radius: 20px;
+    justify-content: center;
+    gap: 15px;
     padding: 30px;
 }
-    .title {
-        text-align: center;
-        color: white;
-    }
-    
-    .grid-wrapper {
-        display: flex;
-        justify-content: center;
+
+    .sketch-pad {
+        flex-basis: 700px;
     }
 
         .grid {
+            margin-left: auto;
+            margin-right: auto;
             display: grid;
-            width: 100%;
+            width: 75%;
             aspect-ratio: 1 / 1;
+
             background-color: white;
-            border: 3px solid rgb(255, 20, 20);
-            border-radius: 10px;
+            border: 6px solid rgb(222, 32, 32);
+            border-radius: 20px;
             overflow: hidden;
+            margin-bottom: 10px;
         }
 
-    .buttons {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-    }
+            .hover-over {
+                background-color: black;
+            }
 
-    .hover-over {
-        background-color: black;
-    }
-
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+    
 /* Footer */
 .footer {
-    padding-top: 20px;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    background-color: rgb(152, 27, 27);
 }
