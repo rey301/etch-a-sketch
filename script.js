@@ -91,6 +91,7 @@ function createGrid() {
 }
 
 let numSquares = 16;
+let temp;
 let mode = 'black';
 let passed = false;
 let minusTenR;
@@ -100,16 +101,18 @@ let minusTenB;
 // edit grid button
 const editBtn = document.querySelector('.edit-button');
 editBtn.addEventListener('click', () => {
+    temp = numSquares;
     numSquares = prompt("Enter new number of squares per side", numSquares);
 
     while ((numSquares > 100 || numSquares < 16) && numSquares !== null) {
         numSquares = prompt("Number has to be between 16 - 100!", numSquares);
-        console.log(numSquares, mode);
     } 
 
-    if (numSquares !== null) {
-        createGrid(numSquares, mode);
+    if (numSquares === null) {
+        numSquares = temp;
     }
+
+    createGrid();
 });
 
 // rainbow mode

@@ -9,7 +9,6 @@ body {
     background-color: rgb(255, 40, 40);
     min-height: 100vh;
     margin: 0;
-
 }
 
 button {
@@ -48,6 +47,7 @@ button:active {
     justify-content: center;
     gap: 15px;
     padding: 30px;
+    padding-bottom: 70px;
 }
 
     .sketch-pad {
