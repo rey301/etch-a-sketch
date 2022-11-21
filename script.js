@@ -54,7 +54,7 @@ function createGrid() {
         div.classList.add(`cell-${i}`);
 
         div.addEventListener('mouseover', e => {
-            if (mode === 'black') {
+            if (mode === 'mono') {
                 e.target.style.backgroundColor = 'black';
             } else if (mode === 'rainbow') {
                 let r = rgbVals[0];
@@ -83,16 +83,22 @@ function createGrid() {
             }
         }, {once: true});
 
-        
         grid.appendChild(div);
     }
-
     grid.style.cssText = `grid-template-columns: repeat(${numSquares}, 1fr); `;
 }
 
+function chooseModeText() {
+    let modeText;
+    mode === 'mono' ? modeText =  'RAINBOW MODE' : 
+                    modeText = 'MONO MODE';
+    return modeText;
+}
+
+
 let numSquares = 16;
 let temp;
-let mode = 'black';
+let mode = 'mono';
 let passed = false;
 let minusTenR;
 let minusTenG;
@@ -100,12 +106,13 @@ let minusTenB;
 
 // edit grid button
 const editBtn = document.querySelector('.edit-button');
+const editWrap = document.querySelector('.edit-text-wrapper');
 editBtn.addEventListener('click', () => {
     temp = numSquares;
-    numSquares = prompt("Enter new number of squares per side", numSquares);
+    numSquares = prompt("Enter a new number of squares per side", numSquares);
 
-    while ((numSquares > 100 || numSquares < 16) && numSquares !== null) {
-        numSquares = prompt("Number has to be between 16 - 100!", numSquares);
+    while ((numSquares > 100 || numSquares < 1) && numSquares !== null) {
+        numSquares = prompt("Number has to be between 1 - 100!", numSquares);
     } 
 
     if (numSquares === null) {
@@ -113,13 +120,42 @@ editBtn.addEventListener('click', () => {
     }
 
     createGrid();
+    const editText = document.querySelector('.edit-text');
+    editWrap.removeChild(editText);
 });
 
-// rainbow mode
-const rainbowBtn = document.querySelector('.rainbow-button');
-rainbowBtn.addEventListener('click', () => {
-    mode = 'rainbow';
+editBtn.addEventListener('mouseover', () => {
+    const editText = document.createElement('div');
+    editText.classList.add('edit-text');
+    editText.textContent = 'EDIT GRID';
+    editWrap.appendChild(editText);
+});
+
+editBtn.addEventListener('mouseleave', () => {
+    const editText = document.querySelector('.edit-text');
+    editWrap.removeChild(editText);
+});
+
+// change mode button
+const modeBtn = document.querySelector('.mode-button');
+const modeWrap = document.querySelector('.mode-text-wrapper');
+modeBtn.addEventListener('click', () => {
+    mode === 'mono' ? mode = 'rainbow' : mode ='mono';
     createGrid();
+    const modeText = document.querySelector('.mode-text');
+    modeText.textContent = chooseModeText();
+});
+
+modeBtn.addEventListener('mouseover', () => {
+    const modeText = document.createElement('div');
+    modeText.classList.add('mode-text');
+    modeText.textContent = chooseModeText();
+    modeWrap.appendChild(modeText);
+});
+
+modeBtn.addEventListener('mouseleave', () => {
+    const modeText = document.querySelector('.mode-text');
+    modeWrap.removeChild(modeText);
 });
 
 // initial grid
