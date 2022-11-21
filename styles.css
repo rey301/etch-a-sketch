@@ -11,31 +11,11 @@ body {
     margin: 0;
 }
 
-button {
-    border-radius: 50px;
-    padding: 5.5%;
-    cursor: pointer;
-    outline: none;
-    color: #fff;
-    background-color: rgb(255, 255, 255);
-    border: none;
-    box-shadow: 0px 5px rgb(112, 111, 111);
-}
-
-button:hover {
-    background-color: rgb(210, 210, 210);
-}
-
-button:active {
-    box-shadow: 0 2px rgb(65, 65, 65);
-    transform: translateY(3px);
-}
-
 /* Header */
 .header {
     font-family: Brush Script MT, Brush Script Std, cursive;
     font-size: 35px;
-    padding-top: 30px;
+    padding-top: 35px;
     text-align: center;
     color: gold;
     text-shadow: 1px 1px 0px goldenrod;
@@ -45,18 +25,17 @@ button:active {
 .content {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    padding: 30px;
-    padding-bottom: 70px;
 }
 
     .sketch-pad {
         flex-basis: 700px;
+        margin: 35px 60px;
     }
 
         .grid {
             margin-left: auto;
             margin-right: auto;
+            
             display: grid;
             width: 75%;
             aspect-ratio: 1 / 1;
@@ -65,7 +44,6 @@ button:active {
             border: 6px solid rgb(222, 32, 32);
             border-radius: 20px;
             overflow: hidden;
-            margin-bottom: 10px;
         }
 
             .hover-over {
@@ -73,15 +51,65 @@ button:active {
             }
 
         .buttons {
+            margin-top: 10px;
             display: flex;
             justify-content: space-between;
-            gap: 10px;
         }
-    
+
+        .buttons > * {
+            width: 12%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+            .edit-text-wrapper,
+            .mode-text-wrapper {
+                align-self: center;
+                height: 20px;
+                width: 200px;
+            }
+
+            .edit-text,
+            .mode-text {
+                text-align: center;
+                color: white;
+                font-family: 'Trebuchet MS', sans-serif;
+                font-style: italic;
+                font-size: 14px;
+                text-shadow: 1px 1px 0px goldenrod;
+            }
+
+                .edit-button,
+                .mode-button
+                {
+                    width: 100%; 
+                    aspect-ratio: 1/1;
+                    border-radius: 50px;
+                    cursor: pointer;
+                    outline: none;
+                    color: #fff;
+                    background-color: rgb(255, 255, 255);
+                    border: none;
+                    box-shadow: 0px 5px rgb(112, 111, 111);
+                }
+                
+                .edit-button:hover,
+                .mode-button:hover 
+                {
+                    background-color: rgb(210, 210, 210);
+                }
+                
+                .edit-button:active,
+                .mode-button:active {
+                    box-shadow: 0 2px rgb(65, 65, 65);
+                    transform: translateY(3px);
+                }
+        
 /* Footer */
 .footer {
-    padding: 15px;
+    padding: 5px;
     text-align: center;
-    color: white;
+    color: rgb(225, 225, 225);
     background-color: rgb(152, 27, 27);
 }
