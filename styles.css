@@ -108,8 +108,20 @@ body {
         
 /* Footer */
 .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
     padding: 5px;
-    text-align: center;
     color: rgb(225, 225, 225);
     background-color: rgb(152, 27, 27);
 }
+    .github-mark {
+        margin-top: 4px;
+        transition: transform .3s ease-in-out;
+        height: 22px;
+    }
+
+    .github-mark:hover {
+        transform: rotate(360deg);
+    }
